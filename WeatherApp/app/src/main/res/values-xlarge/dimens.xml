@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="space0">2dp</dimen>
+    <dimen name="space2">4dp</dimen>
+    <dimen name="space4">8dp</dimen>
+    <dimen name="space8">16dp</dimen>
+    <dimen name="space16">32dp</dimen>
+    <dimen name="space24">48dp</dimen>
+    <dimen name="space32">64dp</dimen>
+    <dimen name="space48">96dp</dimen>
+    <dimen name="space64">128dp</dimen>
+    <dimen name="space72">144dp</dimen>
+    <dimen name="space96">192dp</dimen>
+    <dimen name="space128">256dp</dimen>
+    <dimen name="space150">300dp</dimen>
+    <dimen name="space256">512dp</dimen>
+    <dimen name="space512">1024dp</dimen>
+
+    <dimen name="textSize12">24sp</dimen>
+    <dimen name="textsize14">28sp</dimen>
+    <dimen name="textsize16">32sp</dimen>
+    <dimen name="textsize18">36sp</dimen>
+    <dimen name="textsize20">40sp</dimen>
+    <dimen name="textsize22">44sp</dimen>
+    <dimen name="textsize24">48sp</dimen>
+    <dimen name="textsize28">56sp</dimen>
+    <dimen name="textSize48">96sp</dimen>
+</resources>

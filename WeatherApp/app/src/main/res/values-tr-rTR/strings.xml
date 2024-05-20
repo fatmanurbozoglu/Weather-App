@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HAVA DURUMU</string>
+    <string name="str_error_message">Hata, tekrar deneyiniz!</string>
+    <string name="str_hourly_forecast">SAATLİK TAHMİN</string>
+    <string name="str_days_forecast">10 GÜNLÜK TAHMİN</string>
+    <string name="str_uv_index">UV ENDEKSİ</string>
+    <string name="str_sunset">GÜN BATIMI</string>
+    <string name="str_wind">RÜZGAR</string>
+    <string name="str_local_time">YEREL SAAT</string>
+    <string name="str_feeling">HİSSEDİLEN</string>
+    <string name="str_humidity">NEM ORANI</string>
+    <string name="str_visibility">GÖRÜNÜRLÜK</string>
+    <string name="str_pressure">BASINÇ</string>
+</resources>

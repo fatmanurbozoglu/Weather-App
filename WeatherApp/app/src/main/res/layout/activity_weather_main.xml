@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.WeatherMainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+       >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="#9CC3EF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/errorMessageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_error_message"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space256"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginTop="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:layout_marginBottom="@dimen/space16"
+                app:layout_constraintTop_toTopOf="@id/linearSearch"
+                app:layout_constraintBottom_toTopOf="@id/linearHourly"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/locationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize20"
+                    android:layout_marginTop="@dimen/space32"
+                    android:textStyle="bold"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/temperatureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-thin"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize48"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/space16"
+                    android:textStyle="bold"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weatherTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize16"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/space16"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/space16"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/minTempTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:ignore="MissingConstraints"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/textsize18"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        />
+                    <Space
+                        android:layout_width="@dimen/space8"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/maxTempTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/textsize18"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearHourly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:background="@drawable/round_background"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/linearText"
+                app:layout_constraintBottom_toTopOf="@id/dailyLinear"
+                >
+                <LinearLayout
+                    android:id="@+id/hourlyForecastTextLinear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space8"
+                    android:layout_marginTop="2dp"
+                    android:layout_gravity="start"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/space16"
+                        android:layout_height="@dimen/space16"
+                        android:src="@drawable/localtime" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/hourlyText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space8"
+                        android:layout_marginEnd="@dimen/space8"
+                        android:text="@string/str_hourly_forecast"
+                        android:textColor="#E8E6E6"
+                        android:textSize="@dimen/textsize14" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHourlyForecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space96"
+                    android:layout_marginStart="@dimen/space8"
+                    android:layout_marginTop="@dimen/space0"
+                    android:layout_marginEnd="@dimen/space8"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf= "@id/hourlyText"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dailyLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginTop="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:background="@drawable/round_background"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="@id/linearHourly"
+                app:layout_constraintBottom_toTopOf="@id/details"
+
+                >
+                <LinearLayout
+                    android:id="@+id/tenDayForecastTextLinear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space8"
+                    android:layout_marginTop="2dp"
+                    android:layout_gravity="start"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/space16"
+                        android:layout_height="@dimen/space16"
+                        android:src="@drawable/calendar" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dailyText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space8"
+                        android:layout_marginEnd="@dimen/space8"
+                        android:text="@string/str_days_forecast"
+                        android:textColor="#E8E6E6"
+                        android:textSize="@dimen/textsize14" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDailyWeatherForecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space256"
+                    android:layout_marginStart="@dimen/space8"
+                    android:layout_marginEnd="@dimen/space8"
+                    android:background="@drawable/round_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginTop="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/dailyLinear">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_marginEnd="@dimen/space16"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/sun"/>
+                            <Space
+                                android:layout_width="@dimen/space8"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_uv_index"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/uvIndex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space4"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize22"
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/uvIndexState"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space4"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize14"
+                           />
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            >
+                            <ProgressBar
+                                android:id="@+id/horizontalProgressBar"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="@dimen/space128"
+                                android:layout_height="@dimen/space2"
+                                android:layout_weight="1"
+                                android:layout_marginBottom="@dimen/space16"
+                                android:layout_marginTop="@dimen/space16"
+                                android:max="12"
+                                android:background="@drawable/color_progress_fill"
+                              />
+
+                            <ImageView
+                                android:id="@+id/uvIndexImageView"
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="@dimen/space4"
+                                android:src="@drawable/circle_drawable"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="0dp"
+                                android:visibility="gone" />
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/sunset"/>
+
+                            <Space
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_sunset"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/sunset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space16"
+                            android:layout_marginBottom="@dimen/space8"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize18" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/space48"
+                            android:src="@drawable/sunrise"
+                            android:layout_marginBottom="@dimen/space8"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/sunrise"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textSize="@dimen/textsize14" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/details2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginTop="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:layout_marginBottom="@dimen/space16"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/details">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_marginEnd="@dimen/space16"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/wind" />
+                            <Space
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="wrap_content" />
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_wind"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/space72"
+                            android:layout_marginTop="@dimen/space8"
+                            android:src="@drawable/compass"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/wind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize16" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/localtime" />
+                            <Space
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_local_time"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/localTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space8"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize22"
+                           />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/localDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space48"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize18"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/details3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginTop="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:layout_marginBottom="@dimen/space24"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/details2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/space16"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/feeling"/>
+                            <Space
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_feeling"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+
+
+                        <Space
+                            android:layout_width="@dimen/space4"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space64"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/feeling"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space8"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize24" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/humidity" />
+                            <Space
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="wrap_content" />
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_humidity"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/humidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space8"
+                            android:layout_marginStart="@dimen/space16"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize24"
+                            android:textStyle="bold"
+                           />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/details4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginTop="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                android:layout_marginBottom="@dimen/space24"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_marginEnd="@dimen/space16"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:orientation="horizontal"
+                                >
+                                <ImageView
+                                    android:layout_width="@dimen/space16"
+                                    android:layout_height="@dimen/space16"
+                                    android:src="@drawable/visibility" />
+                                <Space
+                                    android:layout_width="@dimen/space4"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/space8"
+                                    android:text="@string/str_visibility"
+                                    android:textColor="#E8E6E6"
+                                    android:textSize="@dimen/textsize14" />
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space64"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/visibility"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space8"
+                                android:layout_marginStart="@dimen/space16"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/textsize24" />
+
+
+                        </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="@dimen/space0"
+                        android:layout_height="@dimen/space150"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:layout_gravity="start"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space8">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="start">
+                            <ImageView
+                                android:layout_width="@dimen/space16"
+                                android:layout_height="@dimen/space16"
+                                android:src="@drawable/pressure" />
+                            <Space
+                                android:layout_width="@dimen/space4"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/str_pressure"
+                                android:textColor="#E8E6E6"
+                                android:textSize="@dimen/textsize14" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/space72"
+                            android:layout_marginTop="@dimen/space8"
+                            android:src="@drawable/barometer"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/pressure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/textsize14"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/linearText"
+                android:id="@+id/linearSearch"
+                android:layout_marginStart="@dimen/space16"
+                android:layout_marginEnd="@dimen/space16"
+                tools:ignore="MissingConstraints">
+
+                <EditText
+                    android:layout_width="@dimen/space256"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextText"
+                    android:hint="city name"
+                    android:text=""/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/space48"
+                    android:layout_height="@dimen/space32"
+                    android:id="@+id/button"
+                    android:layout_marginStart="@dimen/space32"
+                    android:layout_marginTop="@dimen/space8"
+                    android:src="@drawable/search_icon"
+                    android:background="@drawable/button_background"
+                    />
+            </LinearLayout>
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids = "errorMessageTextView, linearSearch, linearText, linearHourly, dailyLinear, details, details2, details3, details4"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="str_error_message">Error, try again!</string>
+    <string name="str_hourly_forecast">HOURLY FORECAST</string>
+    <string name="str_days_forecast">10 DAY FORECAST</string>
+    <string name="str_uv_index">UV INDEX</string>
+    <string name="str_sunset">SUNSET</string>
+    <string name="str_wind">WIND</string>
+    <string name="str_local_time">LOCAL TIME</string>
+    <string name="str_feeling">FEELING</string>
+    <string name="str_humidity">HUMIDITY</string>
+    <string name="str_visibility">VISIBILITY</string>
+    <string name="str_pressure">PRESSURE</string>
+
+</resources>
